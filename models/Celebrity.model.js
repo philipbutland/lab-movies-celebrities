@@ -8,4 +8,4 @@ const celebritySchema = new Schema({
     catchPhrase: String
 })
 
-module.exports = model('Celebrities',celebritySchema)
+module.exports = model("Celebrities",celebritySchema)
