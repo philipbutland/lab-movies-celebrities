@@ -15,14 +15,20 @@ router.post('/celebrities/create',(req,res)=>{
     console.log(req.body)
     const {name,occupation,catchPhrase} = req.body
     Celebrities.create({name:name,occupation:occupation,catchPhrase:catchPhrase})
-    res.redirect('/celebrities')
+    .then((result)=>{
+        res.redirect('/celebrities')
+    })
+    .catch((error)=>{
+        console.log(error)
+        res.redirect('/new-celebrity')
+    })
 })
-
 
  router.get('/celebrities',(req,res)=>{
      Celebrities.find()
      .then((result)=>{
          console.log(result)
+         // res.render first param = where is the HBS I want to use?
          res.render('celebrities/celebrities',{result})
      })
  })
