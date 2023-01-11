@@ -29,4 +29,14 @@ router.post("/movies/create", (req, res) => {
     });
 });
 
+router.get('/movies',(req,res)=>{
+  Movie.find()
+  .populate('cast')
+  .then((result)=>{
+      console.log(result)
+      res.render("movies/movies",{result})
+  })
+})
+
+
 module.exports = router;
