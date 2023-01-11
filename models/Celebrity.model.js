@@ -1,11 +1,11 @@
 //  Add your code here
 
-const {Schema,model} = require("mongoose")
+const { Schema, model } = require("mongoose");
 
 const celebritySchema = new Schema({
-    name: String,
-    occupation: String,
-    catchPhrase: String
-})
+  name: String,
+  occupation: String,
+  catchPhrase: String,
+});
 
-module.exports = model("Celebrities",celebritySchema)
+module.exports = model("Celebrities", celebritySchema);
