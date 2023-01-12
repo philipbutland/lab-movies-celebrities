@@ -1,14 +1,9 @@
 <h1>Here is the list of all movies</h1>
-
 <div id="container">
-
-
 {{#each result}}
-{{!-- <div style="border: solid green; padding:0 0 10px 10px"> --}}
 <h3><a href="/movies/{{_id}}">{{title}}</a></h3>
-
-</div>
-<br>
 {{/each}}
 </div>
+<a href="/movies/create">Create a New Movie</a>
+
 

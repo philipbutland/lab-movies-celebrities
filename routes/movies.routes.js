@@ -25,54 +25,55 @@ router.post("/movies/create", (req, res) => {
     });
 });
 
-router.get('/movies/:movieId',(req,res)=>{
-  console.log(req.params)
-  Movie.findById(req.params.movieId).populate("cast_id")
-  .then((result)=>{
-      console.log(result)
-      res.render('movies/movie-details',result)
-  })
-})
-
+router.get("/movies/:movieId", (req, res) => {
+  console.log(req.params);
+  Movie.findById(req.params.movieId)
+    .populate("cast_id")
+    .then((result) => {
+      console.log(result);
+      res.render("movies/movie-details", result);
+    });
+});
 
 router.get("/movies", (req, res) => {
-    Movie.find().populate("cast_id")
+  Movie.find()
+    // .populate("cast_id")
     .then((result) => {
       console.log(result);
       res.render("movies/movies", { result });
     });
 });
 
-
-
-router.get('/movies/:movieId/edit',(req,res)=>{
+router.get("/movies/:movieId/edit", (req, res) => {
   Movie.findById(req.params.movieId)
-  .then((movieToEdit)=>{
-      console.log(movieToEdit)
-      Celebrity.find("cast_id")
-      res.render('movies/edit-movie',movieToEdit)
-  })
-})
+    .populate("cast_id")
+    .then((movieToEdit) => {
+      console.log(movieToEdit);
+      Celebrity.find().then((allCelebrities) => {
+        res.render("movies/edit-movie", { movieToEdit, allCelebrities });
+      });
+    });
+});
 
+router.post("/movies/:movieId/edit", (req, res) => {
+  console.log(req.body);
+  const { title, genre, plot, cast_id } = req.body;
+  Movie.findByIdAndUpdate(req.params.movieId, {
+    title: title,
+    genre: genre,
+    plot: plot,
+    cast_id: cast_id,
+  }).then(() => {
+    console.log("Success Movie updated");
+    res.redirect("/movies");
+  });
+});
 
-router.post('/movies/:movieId/edit',(req,res)=>{
-  console.log(req.body)
-  const {title, genre, plot, cast_id} = req.body
-  Movie.findByIdAndUpdate(req.params.movieId,{title: title, genre: genre, plot: plot, cast_id: cast_id })
-  .then(()=>{
-      console.log("Success Movie updated")
-      res.redirect('/movies')
-  })
-})
-
-
-
-router.post('/movies/:movieId/delete',(req,res)=>{
-  console.log(req.params.movieId)
-  Movie.findByIdAndRemove(req.params.movieId)
-  .then(()=>{
-      res.redirect('/movies')
-  })
-})
+router.post("/movies/:movieId/delete", (req, res) => {
+  console.log(req.params.movieId);
+  Movie.findByIdAndRemove(req.params.movieId).then(() => {
+    res.redirect("/movies");
+  });
+});
 
 module.exports = router;
