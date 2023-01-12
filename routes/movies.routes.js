@@ -25,13 +25,23 @@ router.post("/movies/create", (req, res) => {
     });
 });
 
+router.get('/movies/:movieId',(req,res)=>{
+  console.log(req.params)
+  Movie.findById(req.params.movieId).populate("cast_id")
+  .then((result)=>{
+      console.log(result)
+      res.render('movies/movie-details',result)
+  })
+})
+
+
 router.get("/movies", (req, res) => {
-  Movie.find()
-    .populate("cast_id")
-    .then((result) => {
-      console.log(result);
+    // Movie.find().populate("cast_id")
+    // .then((result) => {
+    //   console.log(result);
       res.render("movies/movies", { result });
-    });
+    // });
 });
+
 
 module.exports = router;
