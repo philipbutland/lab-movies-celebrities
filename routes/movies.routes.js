@@ -14,8 +14,8 @@ router.get("/movies/create", (req, res) => {
 
 router.post("/movies/create", (req, res) => {
   console.log(req.body);
-  const { title, genre, plot, cast } = req.body;
-  Movie.create({ title: title, genre: genre, plot: plot, cast: cast })
+  const { title, genre, plot, cast_id } = req.body;
+  Movie.create({ title: title, genre: genre, plot: plot, cast_id: cast_id })
     .then((result) => {
       res.redirect("/movies");
     })
@@ -27,7 +27,7 @@ router.post("/movies/create", (req, res) => {
 
 router.get("/movies", (req, res) => {
   Movie.find()
-    .populate("cast")
+    .populate("cast_id")
     .then((result) => {
       console.log(result);
       res.render("movies/movies", { result });

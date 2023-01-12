@@ -1,6 +1,6 @@
 // starter code in both routes/celebrities.routes.js and routes/movies.routes.js
 const { findByIdAndUpdate } = require('../models/Celebrity.model')
-const Celebrities = require('../models/Celebrity.model')
+const Celebrity = require('../models/Celebrity.model')
 
 
 const router = require("express").Router();
@@ -14,7 +14,7 @@ router.get('/celebrities/create',(req,res)=>{
 router.post('/celebrities/create',(req,res)=>{
     console.log(req.body)
     const {name,occupation,catchPhrase} = req.body
-    Celebrities.create({name:name,occupation:occupation,catchPhrase:catchPhrase})
+    Celebrity.create({name:name,occupation:occupation,catchPhrase:catchPhrase})
     .then((result)=>{
         res.redirect('/celebrities')
     })
@@ -25,7 +25,7 @@ router.post('/celebrities/create',(req,res)=>{
 })
 
  router.get('/celebrities',(req,res)=>{
-     Celebrities.find()
+     Celebrity.find()
      .then((result)=>{
          console.log(result)
          // res.render first param = where is the HBS I want to use?
