@@ -36,12 +36,20 @@ router.get('/movies/:movieId',(req,res)=>{
 
 
 router.get("/movies", (req, res) => {
-    // Movie.find().populate("cast_id")
-    // .then((result) => {
-    //   console.log(result);
+    Movie.find().populate("cast_id")
+    .then((result) => {
+      console.log(result);
       res.render("movies/movies", { result });
-    // });
+    });
 });
 
+
+router.post('/movies/:movieId/delete',(req,res)=>{
+  console.log(req.params.movieId)
+  Movie.findByIdAndRemove(req.params.movieId)
+  .then(()=>{
+      res.redirect('/movies')
+  })
+})
 
 module.exports = router;
