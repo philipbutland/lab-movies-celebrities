@@ -5,18 +5,18 @@
 {{#each result}}
 <div style="border: solid green; padding:0 0 10px 10px">
 <h2>{{title}}</h2>
-
+{{!-- 
 <p>Genre: {{genre}}</p>
 <h3>Cast: 
 {{#each cast_id}}
-{{name}}
-{{/each}}
+{{name}} --}}
+{{!-- {{/each}} --}}
 </h3>
 <a href="/movies/{{_id}}">Link to Movie</a>
 <a style="margin-left:5px" href="/movies/{{_id}}/edit">Edit Movie</a>
-<form action="/movies/{{_id}}/delete" method="POST">
+{{!-- <form action="/movies/{{_id}}/delete" method="POST">
     <button>Delete Movie</button>
-</form>
+</form> --}}
 </div>
 <br>
 {{/each}}
